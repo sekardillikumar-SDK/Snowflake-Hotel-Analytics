@@ -1,0 +1,48 @@
+SELECT * FROM SILVER_HOTEL_BOOKING;
+
+--Daily  Bokking 
+
+CREATE TABLE GOLD_AGG_DAILY_BOKKING AS
+SELECT
+    CHECK_IN_DATE AS DATE,
+    COUNT(*) AS TOTAL_BOOKING,
+    SUM(TOTAL_AMOUNT) AS TOTAL_REVENUE
+FROM SILVER_HOTEL_BOOKING
+GROUP BY CHECK_IN_DATE
+ORDER BY DATE;
+
+-- Hotal City Sales 
+
+CREATE TABLE GOLD_AGG_HOTEL_CITY_SALES AS
+SELECT
+    HOTEL_CITY,
+    SUM(TOTAL_AMOUNT) AS TOTAL_REVENUE
+FROM SILVER_HOTEL_BOOKING 
+GROUP BY HOTEL_CITY
+ORDER BY TOTAL_REVENUE;
+
+-- Gold Aggregation table 
+
+CREATE TABLE GOLD_HOTEL_BOOKING AS
+SELECT 
+booking_id ,
+hotel_id ,
+hotel_city ,
+customer_id ,
+customer_name ,
+customer_email ,
+check_in_date ,
+check_out_date ,
+room_type ,
+num_guests ,
+total_amount ,
+currency,
+booking_status 
+FROM SILVER_HOTEL_BOOKING
+
+
+--checking 
+
+SELECT * FROM GOLD_HOTEL_BOOKING;
+
+SELECT * FROM GOLD_AGG_DAILY_BOKKING LIMIT 30;
